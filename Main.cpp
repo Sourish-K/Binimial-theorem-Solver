@@ -5,9 +5,9 @@ using namespace std;
 int main() {
     int conversionType;
     cout << "Select conversion:" << '\n';
-    cout << "For Vector with no A or B value to Standard, Type 1" << '\n';
+    cout << "For Vector equation with no A or B value to Standard, Type 1" << '\n';
     cout << "For Standard to Factorized, Type 2" << '\n';
-    cout << "For Binomial Expansion (Case 3), Type 3" << '\n';
+    cout << "For Polynoimal Expansion, Type 3" << '\n';
     cin >> conversionType;
 
     switch(conversionType) {
@@ -35,6 +35,7 @@ int main() {
 
         case 3:
             double kValue, cValue, yValue, bValue, result;
+            
             cout << "Binomial Expansion" << '\n';
             
             cout << "Please enter the y value: ";
@@ -48,24 +49,59 @@ int main() {
                 bValue = pow(aValue, vValue - kValue);
                 cValue = pow(yValue, kValue);
                 result = bValue + cValue;
+                cout << "bValue: " << bValue << '\n';
+                cout << "cValue: " << cValue << '\n';
+                cout << "vValue: " << vValue << '\n';
+            }
+            cout << '\n';
+            
+            if(yValue <= 0) {  // this if statment is for all the negative ax+y to the power of 2, 3 and 4. 4 is still in progress.
+                if(yValue == 0){
+                    cout << "yValue = 0";
+                }
+                
+                else if(vValue == 2) {
+                    cout << "vValue = 2" << '\n'; // for testing
+                    cout << aValue << "x^" << vValue << " - " << vValue * yValue * aValue << "x + " << cValue << '\n'; // pow of 2 (x-y)
+                }
+                
+                else if(vValue == 3) {
+                    cout << "vValue = 3" << '\n'; // for testing
+                    cout <<  aValue << "x^" << vValue << " " << vValue * yValue * aValue<< "x^2 + " << (aValue * vValue * pow(yValue, (vValue - 1))) << "x^" << vValue - 1 << " " << pow(yValue, 3) << '\n';
+                    cout << "V: " << vValue << '\n';
+                    cout << "Y: " << yValue << '\n';
+                    cout << "A: " << aValue << '\n';
+                    
+                }
+                else if(vValue == 4){
+                    cout << "vValue = 4" <<'\n'; // for testing
+                }
             }
 
-            switch(vValue){
-                case 1:
-                    cout << aValue << "x^" << vValue << " + " << vValue * yValue * aValue << "x + " << cValue << '\n'; // pow of 2
-                    break;
-                case 2:
-                    cout << aValue << "x^" << vValue << " + " << vValue * yValue * aValue << "x + " << cValue << '\n'; // pow of 3  EDIT
-                    break;
-                case 3:
-                    cout << aValue << "x^" << vValue << " + " << vValue * yValue * aValue << "x + " << cValue << '\n'; // pow of 4 EDIT
-                    break;
-                default;
-                    cout << "Sadly we do not support numbers this large";
+            if(yValue >= 0) {  // this if statment is for all the postive ax+y to the power of 2, 3 and 4. 4 is still in progress.
+                if(yValue == 0){
+                    cout << "yValue = 0";
+                }
+                
+                else if(vValue == 2) {
+                    cout << "vValue = 2" << '\n'; // for testing
+                    cout << aValue << "x^" << vValue << " + " << vValue * yValue * aValue << "x + " << cValue << '\n'; // pow of 2 (x-y)
+                }
+                
+                else if(vValue == 3) {
+                    cout << "vValue = 3" << '\n'; // for testing
+                    cout <<  aValue << "x^" << vValue << " +3 " << vValue * yValue * aValue << "x^2 + " << (aValue * vValue * pow(yValue, (vValue - 1))) << "x^" << vValue - 1 << " + " << pow(yValue, 3) << '\n';
+                    cout << "V: " << vValue << '\n';
+                    cout << "Y: " << yValue << '\n';
+                    cout << "A: " << aValue << '\n';
+                    
+                }
+                else if(vValue == 4){
+                    cout << "vValue = 4" <<'\n'; // for testing
+                }
+            }
 
-            }          
-
-            cout << aValue << "x^" << vValue << " + " << vValue * yValue * aValue << "x + " << cValue << '\n'; // pow of 2
+            //cout << aValue << "x^" << vValue << " + " << vValue * yValue * aValue << "x + " << cValue << '\n'; // pow of 2
 
             break;
 
@@ -77,18 +113,9 @@ int main() {
     return 0;
 }
 
-/*
 
-    cout << "vector >> Standard" << '\n';
-    double x,h, b, a, v, ANSWER;
-    //cout << "Please enter x Value";
-    //cin >> x;
-    cout << "Please enter h Value";
-    cin >> h;
-    cout << "Please enter b Value";
-    //cin >> b;
-    cout << "Please enter a Value";        
-    //cin >> a; 
 
-    cout << "x^" << v << " + " << (2 * h) << "x" << " + " << pow(h, v);
-    */
+
+
+
+
