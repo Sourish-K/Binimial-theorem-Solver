@@ -1,3 +1,5 @@
+// most to all comments were made by ChatGPT
+
 #include <iostream>  // Include the input/output stream library
 #include <cmath>     // Include the math library for mathematical operations like pow and sqrt
 using namespace std; // Use the standard namespace to avoid prefixing std:: to standard functions
