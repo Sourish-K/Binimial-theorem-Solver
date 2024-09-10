@@ -1,3 +1,10 @@
+NOTE:: 
+I have not make comments for the edtied version of the code.
+The HTML code is older and i have not remade it
+Both comments and HTML code are made by ChatGPT (might switch to copilot)
+
+Made by: Sourish Keshari
+
 Overview
 The Quadratic Equation Solver and Converter is a web application designed to handle various quadratic equation tasks. This tool allows users to convert equations between vertex and standard forms, expand polynomials, and solve quadratic equations. It is a handy utility for students, educators, and anyone needing quick quadratic calculations.
 
