@@ -1,6 +1,8 @@
 NOTE:: 
 I have not make comments for the edtied version of the code.
+
 The HTML code is older and i have not remade it
+
 Both comments and HTML code are made by ChatGPT (might switch to copilot)
 
 Made by: Sourish Keshari
