@@ -43,6 +43,75 @@ bool checkAnswer(double aValue, double bValue, double cValue, double& nValueF, d
     return false;
 }
 
+// Function to find the GCF of two numbers using the Euclidean algorithm
+double findGCF(double num1, double num2) {
+    while (num2 != 0) {
+        double temp = fmod(num1, num2);
+        num1 = num2;
+        num2 = temp;
+    }
+    return abs(num1);
+}
+
+// Function to find GCF of aValue and num1
+double findGCF_aValue_num1(double aValue, double bValue, double& num1F) {
+    vector<double> factors;
+
+    // Find the factors of aValue
+    for (double i = 1; i <= abs(aValue); ++i) {
+        if (fmod(aValue, i) == 0) {
+            factors.push_back(i);
+            factors.push_back(aValue / i);
+        }
+    }
+
+    // Sort the factors
+    sort(factors.begin(), factors.end());
+
+    // Find num1 and num2 such that num1 + num2 = bValue
+    for (size_t i = 0; i < factors.size(); ++i) {
+        double num1 = factors[i];
+        double num2 = aValue / num1;
+        if (num1 + num2 == bValue) {
+            num1F = num1;
+            break;
+        }
+    }
+
+    // Return GCF of aValue and num1
+    return findGCF(aValue, num1F);
+}
+
+// Function to find GCF of cValue and num2
+double findGCF_cValue_num2(double cValue, double bValue, double& num2F) {
+    vector<double> factors;
+
+    // Find the factors of cValue
+    for (double i = 1; i <= abs(cValue); ++i) {
+        if (fmod(cValue, i) == 0) {
+            factors.push_back(i);
+            factors.push_back(cValue / i);
+        }
+    }
+
+    // Sort the factors
+    sort(factors.begin(), factors.end());
+
+    // Find num1 and num2 such that num1 + num2 = bValue
+    for (size_t i = 0; i < factors.size(); ++i) {
+        double num1 = factors[i];
+        double num2 = cValue / num1;
+        if (num1 + num2 == bValue) {
+            num2F = num2;
+            break;
+        }
+    }
+
+    // Return GCF of cValue and num2
+    return findGCF(cValue, num2F);
+}
+
+
 
 
 
@@ -74,7 +143,7 @@ int main() {
             cout << "   the abvoe can be both posible or negative" << '\n';
         cout << " ----------------------------------------------------------------------------------------------- \n";
         cout << "4. Convert Standard form to Vertex form" << '\n';  // Menu option 4
-            cout << "   ax^2 + 2abx + b^2" << '\n';
+            cout << "   ax^2 + 2abx + b^2" << '\n';  
             cout << "   ---->" << '\n';
             cout << "   a(x + h)^2 + k" << '\n'; 
         cout << " ----------------------------------------------------------------------------------------------- \n";
@@ -255,8 +324,6 @@ int main() {
                 cout << "Converting standard form to factored. NOTE: Only when the trinomial" << '\n';
                 
                 cout << "has a = 1" << '\n';
-                cout << "Enter A Value: ";
-                cin >> aValue;
                 cout << "Enter B Value: ";
                 cin >> bValue;
                 cout << "Enter C Value: ";
@@ -274,6 +341,84 @@ int main() {
 
                 break;
             case 7:
+                double bVal1, bVal2, num1F, num2F, num1, num2;
+                cout << "Converting standard form to factored. NOTE: Only when the trinomial" << '\n';
+                cout << "has a > 1" << '\n';
+                cout << "Enter A Value: ";
+                cin >> aValue;
+                cout << "Enter B Value: ";
+                cin >> bValue;
+                cout << "Enter C Value: ";
+                cin >> cValue;
+
+                // Check if the factors work
+                if (checkAnswer(aValue, bValue, cValue, nValueF, mValueF)) {
+                    cout << "The factors for AC are: n = " << nValueF << ", m = " << mValueF << '\n';
+                    mValueF = num1F;
+                    nValueF = num2F;
+
+                    cout << "Nested if did not work\n";
+                    // Call the GCF functions
+                    double gcf_a_num1 = findGCF_aValue_num1(aValue, bValue, num1F);
+                    double gcf_c_num2 = findGCF_cValue_num2(cValue, bValue, num2F);
+                    cout << "GCF of aValue (" << aValue << ") and num1 (" << num1F << "): " << gcf_a_num1 << endl;
+                    cout << "GCF of cValue (" << cValue << ") and num2 (" << num2F << "): " << gcf_c_num2 << endl;
+                    
+
+                } 
+                else {
+                    cout << "No valid factors found for AC with the given bValue.\n";
+                }
+                break;
+
+                case 8:
+                    double x, a, c, b, y;
+                    cout << "Solving for x when having y \n";
+                    cout << "The equation should be in ax^2 +- bx +- c = y" << '\n';
+                    cout << "Enter y value";
+                    cin >> yValue;
+                    cout << "Enter a value";
+                    cin >> aValue;
+                    cout << "Enter b value";
+                    cin >> bValue;
+                    cout << "Enter c value";
+                    cin >> cValue;
+                    double leftside;
+                    leftside = (a * pow(x, 2)) + (b * x) + c - y;
+                    // Calculate the discriminant to determine the nature of the roots
+                discriminant = pow(bValue, 2) - (4 * aValue * (cValue - yValue));
+
+                if (discriminant > 0) {
+                    // Two real and distinct roots
+                    term1 = -bValue / (2 * aValue);
+                    term2 = sqrt(discriminant) / (2 * aValue);
+
+                    x1Value = term1 + term2;
+                    x2Value = term1 - term2;
+
+                    cout << "This quadratic equation has 2 x intercepts: " << '\n';
+                    cout << "x1 = " << x1Value << '\n';
+                    cout << "x2 = " << x2Value << '\n';
+                }
+                else if (discriminant == 0) {
+                    // One real root (repeated)
+                    x1Value = x2Value = -bValue / (2 * aValue);
+
+                    cout << "This quadratic equation has 1 x intercept: " << '\n';
+                    cout << "x = " << x1Value << '\n';
+                }
+                else {
+                    // No real roots
+                    cout << "There are no real solutions." << '\n';
+                    
+                }
+                   
+
+
+
+
+                    
+                
 
                 break;
 
